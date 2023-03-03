@@ -10,6 +10,7 @@
 
     <modules>
         <module>common</module>
+        <module>activity</module>
     </modules>
 
     <profiles>
