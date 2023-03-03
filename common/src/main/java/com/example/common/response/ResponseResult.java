@@ -6,13 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public final class ResponseResult<T> {
     private int code;
 
     private String message;
 
     private T data;
+
+    private long timestamp = System.currentTimeMillis();
+
+    private ResponseResult(int code, String message, T data){
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 
     /**
      * 请求成功
