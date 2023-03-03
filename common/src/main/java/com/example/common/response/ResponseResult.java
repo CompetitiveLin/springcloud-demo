@@ -2,7 +2,6 @@ package com.example.common.response;
 
 import com.example.common.response.code.BasicCode;
 import com.example.common.response.code.ErrorCode;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -31,7 +30,7 @@ public final class ResponseResult<T> {
     }
 
     public static <T> ResponseResult<T> success(T data){
-        return new ResponseResult<T>(BasicCode.SUCCESS.getCode(), BasicCode.SUCCESS.getMessage(), data);
+        return new ResponseResult<>(BasicCode.SUCCESS.getCode(), BasicCode.SUCCESS.getMessage(), data);
     }
 
     /**
@@ -44,11 +43,19 @@ public final class ResponseResult<T> {
     }
 
     public static <T> ResponseResult<T> failed(String message){
-        return new ResponseResult<T>(BasicCode.FAILED.getCode(), message, null);
+        return new ResponseResult<>(BasicCode.FAILED.getCode(), message, null);
     }
 
 
     public static <T> ResponseResult<T> failed(ErrorCode errorCode){
-        return new ResponseResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
+        return new ResponseResult<>(errorCode.getCode(), errorCode.getMessage(), null);
+    }
+
+    public boolean isSuccess(){
+        return this.getCode() == BasicCode.SUCCESS.getCode();
+    }
+
+    public boolean isFailed(){
+        return !isSuccess();
     }
 }
