@@ -2,6 +2,7 @@ package com.example.common.response;
 
 import com.example.common.response.code.BasicCode;
 import com.example.common.response.code.ErrorCode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -51,10 +52,12 @@ public final class ResponseResult<T> {
         return new ResponseResult<>(errorCode.getCode(), errorCode.getMessage(), null);
     }
 
+    @JsonIgnore
     public boolean isSuccess(){
         return this.getCode() == BasicCode.SUCCESS.getCode();
     }
 
+    @JsonIgnore
     public boolean isFailed(){
         return !isSuccess();
     }

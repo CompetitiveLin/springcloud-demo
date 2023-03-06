@@ -11,50 +11,8 @@
     <modules>
         <module>common</module>
         <module>activity</module>
+        <module>auth</module>
     </modules>
-
-    <profiles>
-        <!--本地环境-->
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>local</spring.profiles.active>
-            </properties>
-        </profile>
-        <!-- 测试环境 -->
-        <profile>
-            <id>test</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>test</spring.profiles.active>
-            </properties>
-        </profile>
-        <!-- 开发环境 -->
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-            </properties>
-        </profile>
-        <!-- 生产环境 -->
-        <profile>
-            <id>pro</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>pro</spring.profiles.active>
-            </properties>
-        </profile>
-    </profiles>
 
 
     <properties>
@@ -74,6 +32,16 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
