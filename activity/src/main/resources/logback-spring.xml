@@ -17,8 +17,8 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <property name="CONSOLE_LOG_PATTERN"
               value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %clr([%L]) %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
 
-    <!-- 定义日志文件的存储地址，勿在logback配置文件中使用相对路径.通过springProperty可以在properties文件设置相关path,level,name信息 -->
-    <springProperty name="log.path" source="logging.file.path" defaultValue="./logs" />
+    <!-- 定义日志文件的存储地址，勿在logback配置文件中使用相对路径。通过springProperty可以在properties文件设置相关path,level,name信息，下方路径是绝对路径 -->
+    <springProperty name="log.path" source="logging.file.path" defaultValue="/logs" />
     <springProperty name="log.level" source="logging.level" defaultValue="INFO" />
     <springProperty name="log.name" source="logging.file.name" defaultValue="slf4j-logs" />
 
