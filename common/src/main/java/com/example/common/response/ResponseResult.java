@@ -4,8 +4,10 @@ import com.example.common.response.code.BasicCode;
 import com.example.common.response.code.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public final class ResponseResult<T> {
     private int code;
 

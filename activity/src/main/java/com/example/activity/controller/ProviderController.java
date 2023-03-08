@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-public class TestController {
+public class ProviderController {
 
-    @GetMapping("/test")
-    public ResponseResult test(){
+    @GetMapping("/provider")
+    public ResponseResult provider(){
         HashMap<String, Boolean> hashmap = new HashMap<>();
         hashmap.put("1", ResponseResult.success().isSuccess());
         hashmap.put("2", ResponseResult.success("data").isSuccess());
