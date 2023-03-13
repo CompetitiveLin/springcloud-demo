@@ -1,14 +1,19 @@
 package com.example.activity.controller;
 
 import com.example.activity.api.ProviderApi;
+import com.example.activity.mapper.UserInfoMapper;
 import com.example.common.response.ResponseResult;
 import com.example.common.response.code.ErrorCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
 @RestController
+@RequiredArgsConstructor
 public class ProviderController implements ProviderApi {
+
+    private final UserInfoMapper userInfoMapper;
 
     public ResponseResult provider(){
         HashMap<String, Boolean> hashmap = new HashMap<>();
@@ -20,4 +25,8 @@ public class ProviderController implements ProviderApi {
         return ResponseResult.success(hashmap);
     }
 
+    @Override
+    public ResponseResult mysqlTest() {
+        return ResponseResult.success(userInfoMapper.selectList(null));
+    }
 }

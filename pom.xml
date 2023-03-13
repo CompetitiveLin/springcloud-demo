@@ -24,7 +24,8 @@
         <spring-doc.version>1.6.14</spring-doc.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <lombok.version>1.18.22</lombok.version>
-        <postgresql.version>42.3.3</postgresql.version>
+        <mysql.version>8.0.29</mysql.version>
+        <hutool.version>5.8.15</hutool.version>
     </properties>
 
 
@@ -35,6 +36,11 @@
             <version>${lombok.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -72,9 +78,9 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

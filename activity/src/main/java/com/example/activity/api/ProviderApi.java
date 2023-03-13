@@ -6,4 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface ProviderApi {
     @GetMapping("/provider")
     ResponseResult provider();
+
+    @GetMapping("/mysqlTest")
+    ResponseResult mysqlTest();
 }
