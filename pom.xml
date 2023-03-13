@@ -26,6 +26,9 @@
         <lombok.version>1.18.22</lombok.version>
         <mysql.version>8.0.29</mysql.version>
         <hutool.version>5.8.15</hutool.version>
+        <security-oauth2.version>2.2.5.RELEASE</security-oauth2.version>
+        <security-core.version>5.7.5</security-core.version>
+        <autoconfigure.version>2.6.3</autoconfigure.version>
     </properties>
 
 
@@ -81,6 +84,21 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${autoconfigure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${security-core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

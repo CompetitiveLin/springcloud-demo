@@ -7,6 +7,7 @@ import com.example.activity.mapper.UserInfoMapper;
 import com.example.common.response.ResponseResult;
 import com.example.common.response.code.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import java.util.HashMap;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ProviderController implements ProviderApi {
 
     private final UserInfoMapper userInfoMapper;
@@ -30,20 +32,24 @@ public class ProviderController implements ProviderApi {
     }
 
     @Override
-    public ResponseResult mysqlTest() {
-        return ResponseResult.success(userInfoMapper.selectList(null));
+    public ResponseResult insert() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("aaaaaa");
+        userInfo.setPassword("asassasd");
+        userInfoMapper.insert(userInfo);
+        return ResponseResult.success();
     }
 
     @Override
-    public ResponseResult pageSelect() {
-        Page<UserInfo> page = new Page<>(1, 10);
-        userInfoMapper.selectPage(page,null);
-        return ResponseResult.success(page.getRecords());
+    public ResponseResult pageSelect(Integer pageNo, Integer pageSize) {
+        Page<UserInfo> page = new Page<>(pageNo, pageSize);
+        userInfoMapper.selectPage(page, null);
+        return ResponseResult.success(page);
 
     }
 
     @Override
-    public ResponseResult mysqlDelete(@PathVariable Long id) {
+    public ResponseResult mysqlDelete(Long id) {
         int status = userInfoMapper.deleteById(id);
         if(status == 1){
             return ResponseResult.success();
