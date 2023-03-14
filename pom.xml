@@ -12,6 +12,7 @@
         <module>common</module>
         <module>activity</module>
         <module>auth</module>
+        <module>gateway</module>
     </modules>
 
 
@@ -26,6 +27,7 @@
         <lombok.version>1.18.22</lombok.version>
         <mysql.version>8.0.29</mysql.version>
         <hutool.version>5.8.15</hutool.version>
+        <spring-cloud-gateway.version>2.2.2.RELEASE</spring-cloud-gateway.version>
         <security-oauth2.version>2.2.5.RELEASE</security-oauth2.version>
         <security-core.version>5.7.5</security-core.version>
         <autoconfigure.version>2.6.3</autoconfigure.version>
@@ -67,6 +69,13 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-gateway-dependencies</artifactId>
+                <version>${spring-cloud-gateway.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

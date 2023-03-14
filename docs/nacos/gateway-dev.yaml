@@ -1,0 +1,11 @@
+config:
+  info: TEST
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: unique_id1
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/
