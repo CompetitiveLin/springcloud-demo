@@ -6,16 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 public interface ProviderApi {
-    @GetMapping("/provider")
+    @GetMapping("/activity/provider")
     ResponseResult provider();
 
-    @GetMapping("/insert")
+    @GetMapping("/activity/insert")
     ResponseResult insert();
 
-    @GetMapping("/listPage")
+    @GetMapping("/activity/listPage")
     ResponseResult pageSelect(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/activity/delete/{id}")
     ResponseResult mysqlDelete(@PathVariable(value = "id") Long id);
 }

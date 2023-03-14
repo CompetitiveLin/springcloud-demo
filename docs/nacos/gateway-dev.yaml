@@ -1,5 +1,5 @@
-config:
-  info: TEST
+server:
+  port: 8099
 
 spring:
   cloud:
@@ -8,7 +8,7 @@ spring:
         dashboard: localhost:8098
     gateway:
       routes:
-        - id: unique_id1
-          uri: https://www.baidu.com
+        - id: activity_route
+          uri: lb://activity
           predicates:
-            - Path=/
+            - Path=/activity/**
