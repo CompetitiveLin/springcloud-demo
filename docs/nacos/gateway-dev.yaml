@@ -3,6 +3,9 @@ config:
 
 spring:
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8098
     gateway:
       routes:
         - id: unique_id1
