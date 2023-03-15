@@ -27,10 +27,10 @@
         <lombok.version>1.18.22</lombok.version>
         <mysql.version>8.0.29</mysql.version>
         <hutool.version>5.8.15</hutool.version>
-        <spring-cloud-gateway.version>2.2.2.RELEASE</spring-cloud-gateway.version>
         <security-oauth2.version>2.2.5.RELEASE</security-oauth2.version>
         <security-core.version>5.7.5</security-core.version>
         <autoconfigure.version>2.6.3</autoconfigure.version>
+        <jose-jwt.version>9.25.6</jose-jwt.version>
     </properties>
 
 
@@ -73,13 +73,6 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-gateway-dependencies</artifactId>
-                <version>${spring-cloud-gateway.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${spring-doc.version}</version>
@@ -108,6 +101,11 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
                 <version>${security-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${jose-jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
