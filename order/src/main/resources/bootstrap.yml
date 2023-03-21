@@ -1,0 +1,8 @@
+server:
+  port: 8029
+
+spring:
+  application:
+    name: order
+  profiles:
+    active: dev

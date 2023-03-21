@@ -12,3 +12,7 @@ spring:
           uri: lb://activity
           predicates:
             - Path=/activity/**
+        - id: order_route
+          uri: lb://order
+          predicates:
+            - Path=/order/**

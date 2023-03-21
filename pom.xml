@@ -15,6 +15,7 @@
         <module>gateway</module>
         <module>auth/auth_server</module>
         <module>auth/auth_client</module>
+        <module>order</module>
     </modules>
 
 
