@@ -1,3 +1,1 @@
-logging:
-  level:
-    com.example.order: DEBUG
+info: order-dev.yaml
