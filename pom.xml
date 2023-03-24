@@ -21,19 +21,16 @@
 
     <properties>
         <java.version>17</java.version>
-        <springboot.version>2.6.3</springboot.version>
-        <spring-cloud.version>2021.0.1</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+        <springboot.version>3.0.0</springboot.version>
+        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0-RC1</spring-cloud-alibaba.version>
 
-        <spring-doc.version>1.6.14</spring-doc.version>
+        <spring-doc.version>1.6.15</spring-doc.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
-        <lombok.version>1.18.22</lombok.version>
+        <lombok.version>1.18.26</lombok.version>
         <mysql.version>8.0.29</mysql.version>
         <hutool.version>5.8.15</hutool.version>
         <security-oauth2.version>1.0.1</security-oauth2.version>
-        <security-core.version>5.7.5</security-core.version>
-        <autoconfigure.version>2.6.3</autoconfigure.version>
-        <jose-jwt.version>9.25.6</jose-jwt.version>
     </properties>
 
 
@@ -91,25 +88,11 @@
                 <version>${mysql.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-autoconfigure</artifactId>
-                <version>${autoconfigure.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core</artifactId>
-                <version>${security-core.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-oauth2-authorization-server</artifactId>
                 <version>${security-oauth2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.nimbusds</groupId>
-                <artifactId>nimbus-jose-jwt</artifactId>
-                <version>${jose-jwt.version}</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

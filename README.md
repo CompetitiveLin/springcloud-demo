@@ -2,7 +2,7 @@
 
 # Prerequisite
 - JDK: 17
-- Springboot: 2.6.3
-- Spring cloud: 2021.0.1
-- Spring cloud-alibaba: 2021.0.1.0
+- Spring-boot: 3.0.0
+- Spring-cloud: 2022.0.0
+- Spring-cloud-alibaba: 2022.0.0.0-RC1
 
