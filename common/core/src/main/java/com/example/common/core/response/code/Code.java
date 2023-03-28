@@ -1,4 +1,4 @@
-package com.example.common.response.code;
+package com.example.common.core.response.code;
 
 public interface Code {
     int getCode();

@@ -1,7 +1,8 @@
-package com.example.common.response;
+package com.example.common.core.response;
 
-import com.example.common.response.code.BasicCode;
-import com.example.common.response.code.ErrorCode;
+
+import com.example.common.core.response.code.BasicCode;
+import com.example.common.core.response.code.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;

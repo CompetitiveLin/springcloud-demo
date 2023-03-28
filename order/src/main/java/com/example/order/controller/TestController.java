@@ -1,6 +1,6 @@
 package com.example.order.controller;
 
-import com.example.common.response.ResponseResult;
+import com.example.common.core.response.ResponseResult;
 import com.example.order.client.ConsumerClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
