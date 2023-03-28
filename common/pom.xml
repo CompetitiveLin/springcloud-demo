@@ -17,6 +17,7 @@
         <module>core</module>
         <module>redis</module>
         <module>dependency</module>
+        <module>email</module>
     </modules>
 
 </project>
