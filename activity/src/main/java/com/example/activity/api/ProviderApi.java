@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 public interface ProviderApi {
+    
+    @GetMapping("/activity/sendEmail")
+    ResponseResult sendEmail(@RequestParam("emailAddress") String emailAddress);
     @GetMapping("/activity/provider")
     ResponseResult provider();
 
