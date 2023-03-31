@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.activity.api.ProviderApi;
 import com.example.activity.domain.UserInfo;
 import com.example.activity.mapper.UserInfoMapper;
+import com.example.activity.service.EmailService;
 import com.example.common.core.response.ResponseResult;
 import com.example.common.core.response.code.ErrorCode;
-import com.example.common.email.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class ProviderController implements ProviderApi {
     private final UserInfoMapper userInfoMapper;
 
     private final EmailService emailService;
+
 
     @Override
     public ResponseResult sendEmail(String emailAddress) {

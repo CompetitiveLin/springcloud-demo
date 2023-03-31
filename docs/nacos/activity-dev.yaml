@@ -7,6 +7,24 @@ spring:
     username: root
     password: root
 
+  mail:
+    host: smtp.yeah.net
+    port: 465
+    default-encoding: utf-8
+    username: springcloud_mail@yeah.net
+    protocol: smtp
+    password: PUSEELKXAOWSEDDF
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        ssl:
+          enable: true
+
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   configuration:

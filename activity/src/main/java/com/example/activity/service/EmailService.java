@@ -1,4 +1,4 @@
-package com.example.common.email.service;
+package com.example.activity.service;
 
 public interface EmailService {
     Boolean sendEmail(String emailAddress);

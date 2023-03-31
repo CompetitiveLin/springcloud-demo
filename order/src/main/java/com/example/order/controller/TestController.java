@@ -15,6 +15,6 @@ public class TestController {
 
     @GetMapping("/test")
     public ResponseResult test(){
-        return consumerClient.provider();
+        return consumerClient.sendEmail("EEEEEEEEEMMMMMAAAAAILLLLL");
     }
 }
