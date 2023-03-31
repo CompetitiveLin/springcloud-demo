@@ -1,4 +1,4 @@
-package com.example.common.redis.utils;
+package com.example.common.core.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.*;
@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @description: Redis工具类
  */
-@Component
 @RequiredArgsConstructor
 public final class RedisUtil {
 

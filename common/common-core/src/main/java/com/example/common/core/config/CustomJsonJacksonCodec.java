@@ -1,4 +1,4 @@
-package com.example.common.redis.config;
+package com.example.common.core.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -7,10 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
+import io.netty.buffer.*;
 import org.redisson.client.codec.BaseCodec;
 import org.redisson.client.protocol.Decoder;
 import org.redisson.client.protocol.Encoder;
@@ -18,6 +15,7 @@ import org.redisson.client.protocol.Encoder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 
 public class CustomJsonJacksonCodec extends BaseCodec {
     public static final CustomJsonJacksonCodec INSTANCE = new CustomJsonJacksonCodec();

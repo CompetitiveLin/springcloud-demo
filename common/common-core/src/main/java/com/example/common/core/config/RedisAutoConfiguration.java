@@ -1,19 +1,26 @@
-package com.example.common.redis.config;
+package com.example.common.core.config;
 
+import com.example.common.core.utils.RedisKeyUtil;
+import com.example.common.core.utils.RedisUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
 /**
  * Redis配置
  */
 @Configuration
-public class RedisAutoConfig {
+@AutoConfigureAfter({RedisSessionAutoConfiguration.class})
+@Import({RedisUtil.class, RedisKeyUtil.class})
+public class RedisAutoConfiguration {
 
     /**
      * 自定义RedisTemplate

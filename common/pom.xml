@@ -14,9 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
-        <module>redis</module>
-        <module>dependency</module>
+        <module>common-core</module>
     </modules>
 
 </project>

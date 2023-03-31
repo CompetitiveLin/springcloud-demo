@@ -13,8 +13,6 @@
         <module>activity</module>
         <module>auth</module>
         <module>gateway</module>
-        <module>auth/auth_server</module>
-        <module>auth/auth_client</module>
         <module>order</module>
     </modules>
 
@@ -99,25 +97,5 @@
         </dependencies>
     </dependencyManagement>
 
-
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>3.0.2</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 
 </project>
