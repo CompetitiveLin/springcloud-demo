@@ -1,7 +1,7 @@
-package com.example.common.core.config;
+package com.example.common.redis.config;
 
-import com.example.common.core.utils.RedisKeyUtil;
-import com.example.common.core.utils.RedisUtil;
+import com.example.common.redis.utils.RedisKeyUtil;
+import com.example.common.redis.utils.RedisUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

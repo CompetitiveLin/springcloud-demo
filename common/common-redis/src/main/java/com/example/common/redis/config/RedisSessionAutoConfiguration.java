@@ -1,6 +1,6 @@
-package com.example.common.core.config;
+package com.example.common.redis.config;
 
-import com.example.common.core.utils.RedisKeyUtil;
+import com.example.common.redis.utils.RedisKeyUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
@@ -9,10 +9,10 @@ import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;

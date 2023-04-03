@@ -1,9 +1,12 @@
-package com.example.common.core.utils;
+package com.example.common.redis.utils;
 
 import lombok.RequiredArgsConstructor;
-import org.redisson.api.*;
+import org.redisson.api.RAtomicLong;
+import org.redisson.api.RLock;
+import org.redisson.api.RMap;
+import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
+
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 /**

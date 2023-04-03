@@ -7,7 +7,7 @@ import com.example.activity.mapper.UserInfoMapper;
 import com.example.activity.service.EmailService;
 import com.example.common.core.response.ResponseResult;
 import com.example.common.core.response.code.ErrorCode;
-import com.example.common.core.utils.RedisUtil;
+import com.example.common.redis.utils.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,0 +1,2 @@
+com.example.common.redis.config.RedisSessionAutoConfiguration
+com.example.common.redis.config.RedisAutoConfiguration
