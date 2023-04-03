@@ -23,7 +23,7 @@ public class ProviderController implements ProviderApi {
 
     private final EmailService emailService;
 
-    private final RedisUtil redisUtil;
+//    private final RedisUtil redisUtil;
 
 
     @Override
@@ -39,7 +39,7 @@ public class ProviderController implements ProviderApi {
         hashmap.put("3", ResponseResult.failed().isSuccess());
         hashmap.put("4", ResponseResult.failed("message").isSuccess());
         hashmap.put("5", ResponseResult.failed(ErrorCode.FORBIDDEN).isSuccess());
-        redisUtil.set("1","2",30);
+//        redisUtil.set("1","2",30);
         return ResponseResult.success(hashmap);
     }
 
