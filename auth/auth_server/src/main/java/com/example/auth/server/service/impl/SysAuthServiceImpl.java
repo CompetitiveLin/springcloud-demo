@@ -4,7 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import com.example.auth.server.service.SysAuthService;
 import com.example.common.core.exception.CustomException;
-import com.example.common.redis.utils.RedisUtil;
+import com.example.common.redis.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

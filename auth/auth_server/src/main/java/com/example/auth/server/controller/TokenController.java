@@ -17,7 +17,7 @@ public class TokenController {
     private final SysAuthService sysAuthService;
 
     @GetMapping("/captcha")
-    public ResponseResult captcha(){
+    public ResponseResult<String> captcha(){
         return ResponseResult.success(sysAuthService.captcha());
     }
 }

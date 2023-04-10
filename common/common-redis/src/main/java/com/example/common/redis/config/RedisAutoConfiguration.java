@@ -1,7 +1,7 @@
 package com.example.common.redis.config;
 
-import com.example.common.redis.utils.RedisKeyUtil;
-import com.example.common.redis.utils.RedisUtil;
+import com.example.common.redis.util.RedisKeyUtil;
+import com.example.common.redis.util.RedisUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -17,7 +17,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * Redis配置
  */
-@Configuration
 @AutoConfigureAfter({RedisSessionAutoConfiguration.class})
 @Import({RedisUtil.class, RedisKeyUtil.class})
 public class RedisAutoConfiguration {

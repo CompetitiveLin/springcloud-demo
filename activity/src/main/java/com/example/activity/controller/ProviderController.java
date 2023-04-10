@@ -5,9 +5,10 @@ import com.example.activity.api.ProviderApi;
 import com.example.activity.domain.UserInfo;
 import com.example.activity.mapper.UserInfoMapper;
 import com.example.activity.service.EmailService;
+import com.example.common.core.exception.CustomException;
 import com.example.common.core.response.ResponseResult;
 import com.example.common.core.response.code.ErrorCode;
-import com.example.common.redis.utils.RedisUtil;
+import com.example.common.redis.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +28,12 @@ public class ProviderController implements ProviderApi {
 
 
     @Override
-    public ResponseResult sendEmail(String emailAddress) {
+    public ResponseResult<Boolean> sendEmail(String emailAddress) {
         return ResponseResult.success(emailService.sendEmail(emailAddress));
     }
 
     @Override
-    public ResponseResult provider(){
+    public ResponseResult<HashMap<String, Boolean>> provider(){
         HashMap<String, Boolean> hashmap = new HashMap<>();
         hashmap.put("1", ResponseResult.success().isSuccess());
         hashmap.put("2", ResponseResult.success("data").isSuccess());
@@ -44,16 +45,13 @@ public class ProviderController implements ProviderApi {
     }
 
     @Override
-    public ResponseResult insert() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUsername("aaaaaa");
-        userInfo.setPassword("asassasd");
-        userInfoMapper.insert(userInfo);
+    public ResponseResult<?> insert() {
+        if(true) throw new CustomException("CustomException");
         return ResponseResult.success();
     }
 
     @Override
-    public ResponseResult pageSelect(Integer pageNo, Integer pageSize) {
+    public ResponseResult<Page<UserInfo>> pageSelect(Integer pageNo, Integer pageSize) {
         Page<UserInfo> page = new Page<>(pageNo, pageSize);
         userInfoMapper.selectPage(page, null);
         return ResponseResult.success(page);
@@ -61,7 +59,7 @@ public class ProviderController implements ProviderApi {
     }
 
     @Override
-    public ResponseResult mysqlDelete(Long id) {
+    public ResponseResult<?> mysqlDelete(Long id) {
         int status = userInfoMapper.deleteById(id);
         if(status == 1){
             return ResponseResult.success();

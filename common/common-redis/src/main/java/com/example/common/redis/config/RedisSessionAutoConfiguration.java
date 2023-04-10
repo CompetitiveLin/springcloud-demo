@@ -1,6 +1,6 @@
 package com.example.common.redis.config;
 
-import com.example.common.redis.utils.RedisKeyUtil;
+import com.example.common.redis.util.RedisKeyUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;

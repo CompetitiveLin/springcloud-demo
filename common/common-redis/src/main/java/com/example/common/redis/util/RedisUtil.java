@@ -1,4 +1,4 @@
-package com.example.common.redis.utils;
+package com.example.common.redis.util;
 
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RAtomicLong;
