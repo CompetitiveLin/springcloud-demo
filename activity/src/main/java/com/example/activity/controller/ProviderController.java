@@ -4,11 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.activity.api.ProviderApi;
 import com.example.activity.domain.UserInfo;
 import com.example.activity.mapper.UserInfoMapper;
-import com.example.activity.service.EmailService;
+import com.example.common.email.service.EmailService;
 import com.example.common.core.exception.CustomException;
 import com.example.common.core.response.ResponseResult;
 import com.example.common.core.response.code.ErrorCode;
-import com.example.common.redis.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +23,11 @@ public class ProviderController implements ProviderApi {
 
     private final EmailService emailService;
 
-    private final RedisUtil redisUtil;
-
 
     @Override
     public ResponseResult<Boolean> sendEmail(String emailAddress) {
-        return ResponseResult.success(emailService.sendEmail(emailAddress));
+        emailService.sendEmail(emailAddress);
+        return ResponseResult.success();
     }
 
     @Override
@@ -40,7 +38,6 @@ public class ProviderController implements ProviderApi {
         hashmap.put("3", ResponseResult.failed().isSuccess());
         hashmap.put("4", ResponseResult.failed("message").isSuccess());
         hashmap.put("5", ResponseResult.failed(ErrorCode.FORBIDDEN).isSuccess());
-        redisUtil.set("1","2",30);
         return ResponseResult.success(hashmap);
     }
 

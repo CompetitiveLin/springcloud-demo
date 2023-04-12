@@ -13,11 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 
-    @Bean
-    @ConditionalOnMissingBean(PasswordEncoder.class)
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    @ConditionalOnMissingBean(PasswordEncoder.class)
+//    PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
 
     /**
