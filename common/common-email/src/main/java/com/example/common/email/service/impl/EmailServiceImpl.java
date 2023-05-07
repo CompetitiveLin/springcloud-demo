@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService {
         }
         try{
             javaMailSender.send(message);
-            log.info("Email send to {} successful, code is {}.", username, verificationCode);
+            log.info("Email send to {} successful, code is {}.", emailAddress, verificationCode);
         } catch (Exception e){
             throw new CustomException("Sending mail failed.");
         }
