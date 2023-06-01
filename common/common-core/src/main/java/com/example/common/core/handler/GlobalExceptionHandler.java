@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = CustomException.class)
     public ResponseResult<?> handle(CustomException e) {
         if (e.getErrorCode() != null) {
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
         return ResponseResult.failed(e.getMessage());
     }
 
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Throwable.class)
     public ResponseResult<?> unknownException(Throwable e){
         log.error(ThrowableUtil.getStackTrace(e));
