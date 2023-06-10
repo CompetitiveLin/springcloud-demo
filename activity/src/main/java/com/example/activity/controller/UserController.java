@@ -3,9 +3,7 @@ package com.example.activity.controller;
 import com.example.activity.service.UserService;
 import com.example.common.core.response.ResponseResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,8 +12,19 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/signIn")
+    @PostMapping("/sign/in")
     public ResponseResult<?> signIn(){
-        return userService.signIn();
+        userService.signIn();
+        return ResponseResult.success();
+    }
+
+    @GetMapping("/sign/continuous/count")
+    public ResponseResult<Integer> signContinuousCount() {
+        return ResponseResult.success(userService.signContinuousCount());
+    }
+
+    @GetMapping("/sign/count")
+    public ResponseResult<Integer> signCount(@RequestParam String date) {
+        return ResponseResult.success(userService.signCount(date));
     }
 }
