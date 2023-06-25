@@ -23,7 +23,7 @@ public class SysAuthServiceImpl implements SysAuthService {
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(90, 34, 4, 3);
         captcha.setBackground(Color.WHITE);
         String key = CAPTCHA_UUID + UUID.randomUUID();
-        if (redisUtil.hasKey(key)) {
+        if (redisUtil.isExists(key)) {
             throw new CustomException("Already have CAPTCHA_UUID.");
         }
         redisUtil.set(key, captcha.getCode(), 60);

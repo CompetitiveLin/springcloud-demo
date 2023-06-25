@@ -12,19 +12,31 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/sign/in")
-    public ResponseResult<?> signIn(){
-        userService.signIn();
+    @PostMapping("/checkout")
+    public ResponseResult<?> checkout(){
+        userService.checkOut();
         return ResponseResult.success();
     }
 
-    @GetMapping("/sign/continuous/count")
-    public ResponseResult<Integer> signContinuousCount() {
-        return ResponseResult.success(userService.signContinuousCount());
+    @PostMapping("/checkout/late")
+    public ResponseResult<?> lateCheckout(@RequestParam String date){
+        userService.lateCheckout(date);
+        return ResponseResult.success();
     }
 
-    @GetMapping("/sign/count")
-    public ResponseResult<Integer> signCount(@RequestParam String date) {
-        return ResponseResult.success(userService.signCount(date));
+
+    @GetMapping("/checkout/continuous/count")
+    public ResponseResult<Integer> checkoutContinuousCount() {
+        return ResponseResult.success(userService.checkoutContinuousCount());
+    }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
+    @GetMapping("/checkout/count")
+    public ResponseResult<Integer> checkoutCount(@RequestParam String date) {
+        return ResponseResult.success(userService.checkoutCount(date));
     }
 }

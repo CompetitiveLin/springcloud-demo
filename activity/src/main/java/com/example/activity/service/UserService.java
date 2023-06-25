@@ -1,9 +1,11 @@
 package com.example.activity.service;
 
 public interface UserService {
-    void signIn();
+    void checkOut();
 
-    int signContinuousCount();
+    int checkoutContinuousCount();
 
-    int signCount(String date);
+    int checkoutCount(String date);
+
+    void lateCheckout(String date);
 }

@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>springcloud-demo</artifactId>
+        <artifactId>auth</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>auth</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>auth_resource_server</artifactId>
 
-    <modules>
-        <module>auth_server</module>
-        <module>auth_client</module>
-        <module>auth_resource_server</module>
-    </modules>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>

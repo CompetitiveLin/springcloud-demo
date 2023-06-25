@@ -38,7 +38,7 @@ public class EmailServiceImpl implements EmailService {
         message.setSubject("Verification Code");
         message.setText("Code: " + verificationCode);
         String key = CAPTCHA_EMAIL_ADDRESS + emailAddress;
-        if (redisUtil.hasKey(key)) {
+        if (redisUtil.isExists(key)) {
             throw new CustomException("Already have CAPTCHA_EMAIL_ADDRESS.");
         }
         try{
