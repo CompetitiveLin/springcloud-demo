@@ -16,7 +16,11 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +32,7 @@ public class UserServiceImpl implements UserService {
     private final RedisTemplate<String, Object> redisTemplate;
 
     private final RedisUtil redisUtil;
+
     @Override
     public void checkOut() {
         LocalDateTime now = LocalDateTime.now();
@@ -35,9 +40,11 @@ public class UserServiceImpl implements UserService {
         String key = RedisKeyConstant.user.USER_CHECKOUT + keySuffix + "USERNAME";
         int dayOfMonth = now.getDayOfMonth();
         redisTemplate.opsForValue().setBit(key, dayOfMonth -1, true);
-        String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss:SSS"));
-        RList<String> rList = redisUtil.getList(RedisKeyConstant.user.USER_CHECKOUT_RANK);
-        rList.add("USERNAME-" + time);
+
+        TemporalField temporalField = ChronoField.MILLI_OF_DAY;
+        long score =  now.getLong(temporalField);
+        String key2 = RedisKeyConstant.user.USER_CHECKOUT_RANK + dayOfMonth;
+        redisUtil.zScoreAddAsync(key2, (double) score, "USERNAME");
     }
 
     @Override

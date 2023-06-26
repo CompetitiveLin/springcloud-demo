@@ -2,7 +2,9 @@ package com.example.common.redis.util;
 
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.*;
+import org.redisson.client.protocol.ScoredEntry;
 
+import java.util.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 /**
@@ -128,6 +130,19 @@ public final class RedisUtil {
     public RKeys getKeys() {
         return redissonClient.getKeys();
     }
+
+    /**
+     * 获取所有的指定前缀 keys
+     */
+    public Set<String> getKeys(String prefix) {
+        Iterable<String> keysByPattern = getKeys().getKeysByPattern(prefix);
+        Set<String> keys = new HashSet<>();
+        for (String s : keysByPattern) {
+            keys.add(s);
+        }
+        return keys;
+    }
+    
     /**
      * 移除缓存
      *
@@ -239,6 +254,8 @@ public final class RedisUtil {
         return redissonClient.getSet(key);
     }
 
+    //===========  ZSet  ===========//
+
     /**
      * 获取RScoredSortedSet对象
      *
@@ -249,4 +266,165 @@ public final class RedisUtil {
     public <T> RScoredSortedSet<T> getScoredSortedSet(String key) {
         return redissonClient.getScoredSortedSet(key);
     }
+
+
+    /**
+     * 新增ZSet元素,存在则刷新
+     *
+     */
+    public <T> void zScoreAddAsync(String key, double score, T member) {
+        zScoreAddAsync(key, score, member, DEFAULT_EXPIRE);
+    }
+
+
+    /**
+     * 新增ZSet元素,存在则刷新
+     *
+     * @param expire 过期时间
+     */
+    public <T> void zScoreAddAsync(String key, double score, T member, long expire) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        scoredSortedSet.expire(Duration.ofSeconds(expire));
+        scoredSortedSet.addAsync(score, member);
+    }
+
+    /**
+     * 批量新增
+     */
+    public <T> void zScoreAddAsyncBatch(String key, Map<String, Double> map, long expire) {
+        if (expire <= 0) {
+            expire = DEFAULT_EXPIRE;
+        }
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        scoredSortedSet.add(0, DEFAULT_EXPIRE);
+        scoredSortedSet.expire(Duration.ofSeconds(expire));
+        RBatch batch = redissonClient.createBatch();
+        map.forEach((member, score) -> {
+            batch.getScoredSortedSet(key).addAsync(score, member);
+        });
+        batch.execute();
+    }
+
+    /**
+     * 读取指定 key 下所有 member, 按照 score 升序(默认)
+     */
+    public Collection<Object> getZSetMembers(String key, int startIndex, int endIndex) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        return scoredSortedSet.valueRange(startIndex, endIndex);
+    }
+
+    /**
+     * 取指定 key 下所有 member, 按照 score 降序
+     */
+    public Collection<Object> getZSetMembersReversed(String key, int startIndex, int endIndex) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        return scoredSortedSet.valueRangeReversed(startIndex, endIndex);
+    }
+
+    /**
+     * 读取 member和score, 按照 score 升序(默认)
+     */
+    public Collection<ScoredEntry<Object>> getZSetEntryRange(String key, int startIndex, int endIndex) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        return scoredSortedSet.entryRange(startIndex, endIndex);
+    }
+
+
+    /**
+     * 读取 member和score, 按照 score 降序
+     */
+    public Collection<ScoredEntry<Object>> getZSetEntryRangeReversed(String key, int startIndex, int endIndex) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        return scoredSortedSet.entryRangeReversed(startIndex, endIndex);
+    }
+
+    /**
+     * 读取指定 key 下 member 的 score
+     * 返回 null 表示不存在
+     */
+    public Double getZSetMemberScore(String key, String member) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return null;
+        }
+        return scoredSortedSet.getScore(member);
+    }
+
+
+    /**
+     * 读取指定 key 下 memberList 的 score
+     * 返回null 表示不存在
+     */
+    public Double getZSetMemberScore(String key, List<String> memberList) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return null;
+        }
+        return scoredSortedSet.getScore(memberList);
+    }
+
+    /**
+     * 读取指定 key 下 member 的 rank 排名(升序情况)
+     * 返回null 表示不存在, 下标从0开始
+     */
+    public Integer getZSetMemberRank(String key, String member) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return null;
+        }
+        return scoredSortedSet.rank(member);
+    }
+
+
+    /**
+     * 异步删除指定 ZSet 中的指定 memberName 元素
+     */
+    public void removeZSetMemberAsync(String key, String memberName) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return;
+        }
+        scoredSortedSet.removeAsync(memberName);
+    }
+
+
+    /**
+     * 异步批量删除指定 ZSet 中的指定 member 元素列表
+     */
+    public void removeZSetMemberAsync(String key, List<String> memberList) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return;
+        }
+        RBatch batch = redissonClient.createBatch();
+        memberList.forEach(member -> batch.getScoredSortedSet(key).removeAsync(member));
+        batch.execute();
+    }
+
+
+    /**
+     * 统计ZSet分数范围内元素总数. 区间包含分数本身
+     * 注意这里不能用 -1 代替最大值
+     */
+    public int getZSetCountByScoresInclusive(String key, double startScore, double endScore) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return 0;
+        }
+        return scoredSortedSet.count(startScore, true, endScore, true);
+    }
+
+    /**
+     * 返回ZSet分数范围内 member 列表. 区间包含分数本身.
+     * 注意这里不能用 -1 代替最大值
+     */
+    public Collection<Object> getZSetMembersByScoresInclusive(String key, double startScore, double endScore) {
+        RScoredSortedSet<Object> scoredSortedSet = getScoredSortedSet(key);
+        if (!scoredSortedSet.isExists()) {
+            return null;
+        }
+        return scoredSortedSet.valueRange(startScore, true, endScore, true);
+    }
+    
+    
 }
