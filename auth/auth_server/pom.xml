@@ -51,7 +51,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${springboot.version}</version>
                 <configuration>
-                    <mainClass>com.example.auth.server.AuthApplication</mainClass>
+                    <mainClass>com.example.auth.server.AuthResourceServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

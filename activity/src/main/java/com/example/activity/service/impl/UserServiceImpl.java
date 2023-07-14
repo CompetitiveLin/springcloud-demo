@@ -1,10 +1,8 @@
 package com.example.activity.service.impl;
 
 import com.example.activity.service.UserService;
-import com.example.common.core.constant.RedisKeyConstant;
 import com.example.common.redis.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
-import org.redisson.api.RList;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -16,13 +14,14 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalField;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static com.example.common.core.constant.RedisKeyConstant.user.USER_CHECKOUT;
+import static com.example.common.core.constant.RedisKeyConstant.user.USER_CHECKOUT_RANK;
 
 
 @Service
@@ -37,13 +36,13 @@ public class UserServiceImpl implements UserService {
     public void checkOut() {
         LocalDateTime now = LocalDateTime.now();
         String keySuffix = now.format(DateTimeFormatter.ofPattern("yyyyMM:"));
-        String key = RedisKeyConstant.user.USER_CHECKOUT + keySuffix + "USERNAME";
+        String key = USER_CHECKOUT + keySuffix + "USERNAME";
         int dayOfMonth = now.getDayOfMonth();
         redisTemplate.opsForValue().setBit(key, dayOfMonth -1, true);
 
         TemporalField temporalField = ChronoField.MILLI_OF_DAY;
         long score =  now.getLong(temporalField);
-        String key2 = RedisKeyConstant.user.USER_CHECKOUT_RANK + dayOfMonth;
+        String key2 = USER_CHECKOUT_RANK + dayOfMonth;
         redisUtil.zScoreAddAsync(key2, (double) score, "USERNAME");
     }
 
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
         LocalDateTime now = LocalDateTime.now();
         String keySuffix = now.format(DateTimeFormatter.ofPattern("yyyyMM:"));
-        String key = RedisKeyConstant.user.USER_CHECKOUT + keySuffix + "USERNAME";
+        String key = USER_CHECKOUT + keySuffix + "USERNAME";
         int dayOfMonth = now.getDayOfMonth();
         List<Long> result = redisTemplate.opsForValue().bitField(
                 key,
@@ -77,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
         LocalDateTime dateOfSign = StringParseLocalDateTime(date);
         String keySuffix = dateOfSign.format(DateTimeFormatter.ofPattern("yyyyMM:"));
-        String key = RedisKeyConstant.user.USER_CHECKOUT + keySuffix + "USERNAME";
+        String key = USER_CHECKOUT + keySuffix + "USERNAME";
         Long count = redisTemplate.execute(new RedisCallback<Long>() {
             @Override
             public Long doInRedis(RedisConnection redisConnection) throws DataAccessException {
@@ -92,7 +91,7 @@ public class UserServiceImpl implements UserService {
     public void lateCheckout(String date) {
         LocalDateTime dateOfSign = StringParseLocalDateTime(date);
         String keySuffix = dateOfSign.format(DateTimeFormatter.ofPattern("yyyyMM:"));
-        String key = RedisKeyConstant.user.USER_CHECKOUT + keySuffix + "USERNAME";
+        String key = USER_CHECKOUT + keySuffix + "USERNAME";
         int dayOfMonth = dateOfSign.getDayOfMonth();
         redisTemplate.opsForValue().setBit(key, dayOfMonth - 1, true);
     }

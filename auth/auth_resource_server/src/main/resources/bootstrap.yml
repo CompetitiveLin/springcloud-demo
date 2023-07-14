@@ -1,0 +1,20 @@
+server:
+  port: 8023
+
+spring:
+  application:
+    name: auth_resource_server
+  profiles:
+    active: dev
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/KeycloakRealm
+          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      resource-id: keycloak-client
+      principal-attribute: preferred_username

@@ -14,7 +14,7 @@ public interface GithubClient {
 
 
     @GetMapping(value = "/orgs/china-digital-hub/memberships/{networkId}")
-    JSONObject getMemberships(@PathVariable String networkId);
+    JSONObject getMemberships(@PathVariable(value = "networkId") String networkId);
 
     @PostMapping(value = "/repos/china-digital-hub/ActionTest/actions/workflows/main.yaml/dispatches")
     void triggerActions(@RequestBody ActionsVo actionsVo);

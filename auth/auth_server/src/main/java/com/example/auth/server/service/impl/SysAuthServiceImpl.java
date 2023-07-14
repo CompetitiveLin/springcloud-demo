@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
-import java.util.UUID;
 
 import static com.example.common.core.constant.RedisKeyConstant.captcha.CAPTCHA_UUID;
 
@@ -19,10 +18,10 @@ public class SysAuthServiceImpl implements SysAuthService {
     private final RedisUtil redisUtil;
 
     @Override
-    public String captcha() {
+    public String captcha(String uuid) {
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(90, 34, 4, 3);
         captcha.setBackground(Color.WHITE);
-        String key = CAPTCHA_UUID + UUID.randomUUID();
+        String key = CAPTCHA_UUID + uuid;
         if (redisUtil.isExists(key)) {
             throw new CustomException("Already have CAPTCHA_UUID.");
         }

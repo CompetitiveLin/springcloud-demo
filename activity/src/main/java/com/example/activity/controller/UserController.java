@@ -39,4 +39,9 @@ public class UserController {
     public ResponseResult<Integer> checkoutCount(@RequestParam String date) {
         return ResponseResult.success(userService.checkoutCount(date));
     }
+
+    @GetMapping("/checkout/rank")
+    public ResponseResult<Integer> rank(){
+        return ResponseResult.success();
+    }
 }
